@@ -1,0 +1,28 @@
+# Shims for Debian compatibility
+- name: Create /etc/ssl/private link for SSL key files.
+  file:
+    src: /etc/pki/tls/private
+    dest: /etc/ssl/private
+    state: link
+  when: conga_variant == "ssl" or conga_variant == "no-ssl+ssl"
+
+- name: Create sites-enabled directory.
+  file:
+    path: "{{ apache_config_path }}/sites-enabled"
+    state: directory
+
+- name: Include vhosts from sites-enabled.
+  lineinfile:
+    dest: "{{ apache_config_path }}/conf.d/vhosts.conf"
+    line: 'IncludeOptional sites-enabled/*.conf'
+    create: yes
+  notify:
+    - restart apache
+
+- name: Set APACHE_LOG_DIR variable.
+  lineinfile:
+    dest: "{{ apache_config_path }}/conf.d/00-envvars.conf"
+    line: 'Define APACHE_LOG_DIR /var/log/httpd'
+    create: yes
+  notify:
+    - restart apache

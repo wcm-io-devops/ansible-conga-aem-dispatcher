@@ -1,0 +1,24 @@
+- name: Setup SSL file list.
+  set_fact:
+    ssl_files:
+      - "{{ tenant.config.dispatcher.sslCertificateFile }}"
+      - "{{ tenant.config.dispatcher.sslCertificateKeyFile }}"
+
+# sslCACertificateFile is optional
+- block:
+  - name: Add SSL CA certificate to list.
+    set_fact:
+      ca_file:
+        - "{{ tenant.config.dispatcher.sslCACertificateFile }}"
+  - set_fact:
+      ssl_files: "{{ ssl_files + ca_file }}"
+  when: tenant.config.dispatcher.sslCACertificateFile is defined
+
+- name: Copy SSL files.
+  copy:
+    src: "{{ item | basename }}"
+    dest: "{{ item }}"
+    mode: "0644"
+  with_items: "{{ ssl_files }}"
+  notify:
+    - restart apache

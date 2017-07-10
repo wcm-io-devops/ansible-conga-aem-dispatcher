@@ -1,0 +1,28 @@
+- name: Include OS-specific setup.
+  include: "setup_{{ ansible_os_family }}.yml"
+
+- name: Create cache root directory.
+  file:
+    path: "{{ conga_config.dispatcher.cacheRootPath }}"
+    state: directory
+    owner: "{{ apache_user }}"
+    group: "{{ apache_group }}"
+
+- name: Setup SSL if required by CONGA variant.
+  include: setup_ssl.yml
+  when: conga_variant == "ssl" or conga_variant == "no-ssl+ssl"
+
+- include_role:
+    name: conga-files
+  vars:
+    base_path: "{{ apache_config_path }}"
+    handlers: [ restart apache ]
+
+- name: Enable CONGA sites.
+  file:
+    src: "{{ apache_config_path }}/{{ item }}"
+    dest: "{{ apache_config_path }}/sites-enabled/{{ item | basename }}"
+    state: link
+  with_items: "{{ conga_files_paths | select('match', 'sites-available/.*') | list }}"
+  notify:
+    - restart apache
