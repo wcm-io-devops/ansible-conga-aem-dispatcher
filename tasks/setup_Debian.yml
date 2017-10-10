@@ -1,3 +1,37 @@
+- name: Get installed version of Apache.
+  shell: "apachectl -v"
+  register: _apache_version
+
+- name: Create apache_version variable.
+  set_fact:
+    apache_version: "{{ _apache_version.stdout.split()[2].split('/')[1] }}"
+
+- name: Use Include directive for Apache 2.2.
+  set_fact:
+    _include_directive: Include
+  when: "apache_version.split('.')[1] == '2'"
+
+- name: Use IncludeOptional directive for Apache 2.4.
+  set_fact:
+    _include_directive: IncludeOptional
+  when: "apache_version.split('.')[1] == '4'"
+
+- name: Include only *.conf files from conf.d.
+  lineinfile:
+    dest: "{{ apache_config_path }}/apache2.conf"
+    line: '{{ _include_directive }} conf.d/*.conf'
+    regexp: '^Include(?:Optional)? conf.d/'
+  notify:
+    - restart apache
+
+# Make additional Apache modules available before we try to enable them
+- include_role:
+    name: conga-files
+  vars:
+    base_path: "{{ apache_config_path }}"
+    handlers: [ restart apache ]
+    files: "{{ conga_files_paths | select('match', 'mods-available/.*') | list }}"
+
 - name: Enable Apache modules required by CONGA role.
   apache2_module:
     name: "{{ item }}"
@@ -8,14 +42,6 @@
     - restart apache
 
 # The CONGA configs still use 2.2 auth syntax so we need to enable the compat module for 2.4+
-- name: Get installed version of Apache.
-  shell: "apachectl -v"
-  register: _apache_version
-
-- name: Create apache_version variable.
-  set_fact:
-    apache_version: "{{ _apache_version.stdout.split()[2].split('/')[1] }}"
-
 - name: Enable Apache access_compat module for Apache 2.4.
   apache2_module:
     name: access_compat

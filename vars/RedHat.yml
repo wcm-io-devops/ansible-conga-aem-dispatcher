@@ -1,0 +1,4 @@
+apache_config_path: /etc/httpd
+
+apache_user: apache
+apache_group: apache
