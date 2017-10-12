@@ -6,7 +6,7 @@
 
 - name: Create cache root directory.
   file:
-    path: "{{ conga_config.dispatcher.cacheRootPath }}"
+    path: "{{ conga_config.dispatcher.cache.rootPath }}"
     state: directory
     owner: "{{ apache_user }}"
     group: "{{ apache_group }}"

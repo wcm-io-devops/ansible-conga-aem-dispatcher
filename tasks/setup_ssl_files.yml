@@ -1,18 +1,18 @@
 - name: Setup SSL file list.
   set_fact:
     ssl_files:
-      - "{{ tenant.config.dispatcher.sslCertificateFile }}"
-      - "{{ tenant.config.dispatcher.sslCertificateKeyFile }}"
+      - "{{ tenant.config.httpd.ssl.certificateFile }}"
+      - "{{ tenant.config.httpd.ssl.certificateKeyFile }}"
 
-# sslCACertificateFile is optional
+# CA certificate is optional
 - block:
   - name: Add SSL CA certificate to list.
     set_fact:
       ca_file:
-        - "{{ tenant.config.dispatcher.sslCACertificateFile }}"
+        - "{{ tenant.config.httpd.ssl.caCertificateFile }}"
   - set_fact:
       ssl_files: "{{ ssl_files + ca_file }}"
-  when: tenant.config.dispatcher.sslCACertificateFile is defined
+  when: tenant.config.httpd.ssl.caCertificateFile is defined
 
 - name: Copy SSL files.
   copy:
