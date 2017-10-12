@@ -4,20 +4,7 @@
     src: /etc/pki/tls/private
     dest: /etc/ssl/private
     state: link
-  when: conga_variant == "ssl" or conga_variant == "no-ssl+ssl"
-
-- name: Create sites-enabled directory.
-  file:
-    path: "{{ apache_config_path }}/sites-enabled"
-    state: directory
-
-- name: Include vhosts from sites-enabled.
-  lineinfile:
-    dest: "{{ apache_config_path }}/conf.d/vhosts.conf"
-    line: 'IncludeOptional sites-enabled/*.conf'
-    create: yes
-  notify:
-    - restart apache
+  when: "'ssl' in conga_variants"
 
 - name: Set APACHE_LOG_DIR variable.
   lineinfile:
