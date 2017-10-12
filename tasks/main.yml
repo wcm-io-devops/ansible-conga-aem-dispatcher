@@ -1,22 +1,28 @@
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
 - name: Include OS-specific setup.
   include: "setup_{{ ansible_os_family }}.yml"
 
 - name: Create cache root directory.
   file:
-    path: "{{ conga_config.dispatcher.cacheRootPath }}"
+    path: "{{ conga_config.dispatcher.cache.rootPath }}"
     state: directory
     owner: "{{ apache_user }}"
     group: "{{ apache_group }}"
 
 - name: Setup SSL if required by CONGA variant.
   include: setup_ssl.yml
-  when: conga_variant == "ssl" or conga_variant == "no-ssl+ssl"
+  when: "'ssl' in conga_variants"
 
+# Copy all CONGA files except mods-available (which only apply to Debian)
 - include_role:
     name: conga-files
   vars:
     base_path: "{{ apache_config_path }}"
     handlers: [ restart apache ]
+    files: "{{ conga_files_paths | select('match', '^(?!mods-available/)') | list }}"
+    directories: "{{ conga_directories | select('match', '^(?!mods-available)') | list }}"
 
 - name: Enable CONGA sites.
   file:
