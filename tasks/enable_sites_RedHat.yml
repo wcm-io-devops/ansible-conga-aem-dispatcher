@@ -1,0 +1,15 @@
+- name: Copy CONGA vhosts.
+  include_role:
+    name: conga-files
+  vars:
+    base_path: "{{ apache_config_path }}"
+    handlers: [ restart apache ]
+    files: "{{ conga_files_paths | select('match', 'vhosts.d/') | list }}"
+
+- name: Include vhosts from vhosts.d.
+  lineinfile:
+    dest: "{{ apache_config_path }}/conf.d/vhosts.conf"
+    line: 'IncludeOptional vhosts.d/*.conf'
+    create: yes
+  notify:
+    - restart apache

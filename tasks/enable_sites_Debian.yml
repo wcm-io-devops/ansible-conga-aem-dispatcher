@@ -1,0 +1,18 @@
+- name: Copy CONGA vhosts.
+  include_role:
+    name: conga-files
+  vars:
+    base_path: "{{ apache_config_path }}/sites-available"
+    handlers: [ restart apache ]
+    files: "{{ conga_files_paths | select('match', 'vhosts.d/') | list }}"
+    directories: []
+    strip: 'vhosts.d/'
+
+- name: Enable CONGA sites.
+  command: "a2ensite {{ item | basename }}"
+  args:
+    creates: "{{ apache_config_path }}/sites-enabled/{{ item | basename }}"
+  with_items: "{{ conga_files_paths | select('match', 'vhosts.d/.*') | list }}"
+  notify:
+    - restart apache
+
