@@ -15,14 +15,15 @@
   include: setup_ssl.yml
   when: "'ssl' in conga_variants"
 
-- name: Copy all CONGA files except vhosts.
+# copy all config files but leave out distribution specific files
+- name: Copy all CONGA files except vhosts and conf
   include_role:
     name: conga-files
   vars:
     base_path: "{{ apache_config_path }}"
     handlers: [ restart apache ]
-    files: "{{ conga_files_paths | select('match', '^(?!vhosts.d/)') | list }}"
-    directories: "{{ conga_directories | select('match', '^(?!vhosts.d)') | list }}"
+    files: "{{ conga_files_paths | select('match', '^(?!(vhosts|conf).d/)') | list }}"
+    directories: "{{ conga_directories | select('match', '^(?!(vhosts|conf).d)') | list }}"
 
 - name: Enable CONGA sites.
   include: "enable_sites_{{ ansible_os_family }}.yml"
