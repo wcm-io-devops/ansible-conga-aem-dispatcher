@@ -13,3 +13,13 @@
     create: yes
   notify:
     - restart apache
+
+# copy all conf files from conf.d to conf.d on redhat
+- name: Copy conf.d CONGA files
+  include_role:
+    name: conga-files
+  vars:
+    base_path: "{{ apache_config_path }}"
+    handlers: [ restart apache ]
+    files: "{{ conga_files_paths | select('match', '^conf.d/.*') | list }}"
+    directories: "{{ conga_directories | select('match', '^conf.d/.*') | list }}"

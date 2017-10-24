@@ -23,3 +23,23 @@
   when: "apache_version.split('.')[1] >= '4'"
   notify:
     - restart apache
+
+# Copy conf files from conf.d to conf-available
+- name: Copy conf.d CONGA files to conf-available.
+  include_role:
+    name: conga-files
+  vars:
+    base_path: "{{ apache_config_path }}/conf-available"
+    strip: "conf.d/"
+    handlers: [ restart apache ]
+    files: "{{ conga_files_paths | select('match', '^conf.d/.*') | list }}"
+    directories: []
+
+# enable all configuration files that were copied to conf-available
+- name: Enable CONGA Apache configurations.
+  command: a2enconf {{ item | basename }}
+  args:
+    creates: "{{ apache_config_path }}/conf-enabled/{{ item | basename }}"
+  with_items: "{{ conga_files_paths | select('match', '^conf.d/.*') | list }}"
+  notify:
+    - restart apache
