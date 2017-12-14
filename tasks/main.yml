@@ -20,10 +20,10 @@
   include_role:
     name: conga-files
   vars:
-    base_path: "{{ apache_config_path }}"
-    handlers: [ restart apache ]
-    files: "{{ conga_files_paths | select('match', '^(?!(vhosts|conf).d/)') | list }}"
-    directories: "{{ conga_directories | select('match', '^(?!(vhosts|conf).d)') | list }}"
+    conga_files_base_path: "{{ apache_config_path }}"
+    conga_files_handlers: [ restart apache ]
+    conga_files_files: "{{ conga_files_paths | select('match', '^(?!(vhosts|conf).d/)') | list }}"
+    conga_files_directories: "{{ conga_directories | select('match', '^(?!(vhosts|conf).d)') | list }}"
 
 - name: Enable CONGA sites.
   include: "enable_sites_{{ ansible_os_family }}.yml"
