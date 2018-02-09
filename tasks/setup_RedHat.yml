@@ -1,3 +1,7 @@
+- name: Get installed version of Apache.
+  shell: "httpd -v"
+  register: _apache_version
+
 # Shims for Debian compatibility
 - name: Create /etc/ssl/private link for SSL key files.
   file:

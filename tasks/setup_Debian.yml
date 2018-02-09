@@ -2,28 +2,6 @@
   shell: "apachectl -v"
   register: _apache_version
 
-- name: Create apache_version variable.
-  set_fact:
-    apache_version: "{{ _apache_version.stdout.split()[2].split('/')[1] }}"
-
-- name: Enable Apache modules required by CONGA role.
-  apache2_module:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{ conga_config.httpd.modules }}"
-  when: conga_config.httpd is defined and conga_config.httpd.modules is defined
-  notify:
-    - restart apache
-
-# The CONGA configs still use 2.2 auth syntax so we need to enable the compat module for 2.4+
-- name: Enable Apache access_compat module for Apache 2.4.
-  apache2_module:
-    name: access_compat
-    state: present
-  when: "apache_version.split('.')[1] >= '4'"
-  notify:
-    - restart apache
-
 # Copy conf files from conf.d to conf-available
 - name: Copy conf.d CONGA files to conf-available.
   include_role:
