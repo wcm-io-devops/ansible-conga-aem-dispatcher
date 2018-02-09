@@ -2,6 +2,9 @@
   shell: "httpd -v"
   register: _apache_version
 
+- name: Include httpd module setup.
+  include: "enable_modules.yml"
+
 # Shims for Debian compatibility
 - name: Create /etc/ssl/private link for SSL key files.
   file:

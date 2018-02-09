@@ -2,6 +2,9 @@
   shell: "apachectl -v"
   register: _apache_version
 
+- name: Include httpd module setup.
+  include: "enable_modules.yml"
+
 # Copy conf files from conf.d to conf-available
 - name: Copy conf.d CONGA files to conf-available.
   include_role:
