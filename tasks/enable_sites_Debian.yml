@@ -1,6 +1,6 @@
 - name: Copy CONGA vhosts.
   include_role:
-    name: conga-files
+    name: wcm-io-devops.conga-files
   vars:
     conga_files_base_path: "{{ apache_config_path }}/sites-available"
     conga_files_handlers: [ restart apache ]
