@@ -26,7 +26,7 @@ CONGA configuration model.
 ## Example
 
 Compiles the CONGA configuration, installs the webserver with the
-Ansible `wcm-io-devops.apache` role and deploys the configuration from
+Ansible [wcm-io-devops.apache](https://github.com/wcm-io-devops/ansible-role-apache) role and deploys the configuration from
 the CONGA `aem-dispatcher` role in the `aem-author` variant.
 
 	- hosts: localhost
