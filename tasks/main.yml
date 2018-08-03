@@ -18,7 +18,7 @@
 # copy all config files but leave out distribution specific files
 - name: Copy all CONGA files except vhosts and conf
   include_role:
-    name: wcm-io-devops.conga-files
+    name: wcm-io-devops.conga_files
   vars:
     conga_files_base_path: "{{ apache_config_path }}"
     conga_files_handlers: [ restart apache ]

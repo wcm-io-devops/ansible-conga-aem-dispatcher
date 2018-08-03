@@ -8,7 +8,7 @@
 # Copy conf files from conf.d to conf-available
 - name: Copy conf.d CONGA files to conf-available.
   include_role:
-    name: wcm-io-devops.conga-files
+    name: wcm-io-devops.conga_files
   vars:
     conga_files_base_path: "{{ apache_config_path }}/conf-available"
     conga_files_strip: "conf.d/"
