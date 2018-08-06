@@ -15,4 +15,3 @@
   with_items: "{{ conga_files_paths | select('match', 'vhosts.d/.*') | list }}"
   notify:
     - restart apache
-
