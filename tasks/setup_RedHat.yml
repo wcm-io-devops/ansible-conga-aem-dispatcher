@@ -24,7 +24,7 @@
 # copy all conf files from conf.d to conf.d on redhat
 - name: Copy conf.d CONGA files
   include_role:
-    name: wcm-io-devops.conga-files
+    name: wcm_io_devops.conga_files
   vars:
     conga_files_base_path: "{{ apache_config_path }}"
     conga_files_handlers: [ restart apache ]
