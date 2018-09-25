@@ -6,8 +6,10 @@ role
 with Ansible. It also configured the webserver based on the CONGA
 configuration model.
 
-It is part of the wcm.io set of roles to integrate Ansible with
-[CONGA](http://devops.wcm.io/conga/) and cannot be used independently.
+> This role was developed as part of the
+> [wcm.io DevOps Ansible Automation for AEM](http://devops.wcm.io/ansible-aem/)
+> to integrate Ansible with
+> [CONGA](http://devops.wcm.io/conga/).
 
 ## Requirements
 
