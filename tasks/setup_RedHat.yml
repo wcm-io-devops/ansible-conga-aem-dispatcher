@@ -3,7 +3,7 @@
   register: _apache_version
 
 - name: Include httpd module setup.
-  include: "enable_modules.yml"
+  include_tasks: "enable_modules.yml"
 
 # Shims for Debian compatibility
 - name: Create /etc/ssl/private link for SSL key files.

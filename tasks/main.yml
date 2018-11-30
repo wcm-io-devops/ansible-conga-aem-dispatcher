@@ -2,7 +2,7 @@
   include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Include OS-specific setup.
-  include: "setup_{{ ansible_os_family }}.yml"
+  include_tasks: "setup_{{ ansible_os_family }}.yml"
 
 - name: Create cache root directory.
   file:
@@ -12,7 +12,7 @@
     group: "{{ apache_group }}"
 
 - name: Setup SSL if required by CONGA variant.
-  include: setup_ssl.yml
+  include_tasks: setup_ssl.yml
   when: "'ssl' in conga_variants"
 
 # copy all config files but leave out distribution specific files
@@ -26,4 +26,4 @@
     conga_files_directories: "{{ conga_directories | select('match', '^(?!(vhosts|conf).d)') | list }}"
 
 - name: Enable CONGA sites.
-  include: "enable_sites_{{ ansible_os_family }}.yml"
+  include_tasks: "enable_sites_{{ ansible_os_family }}.yml"
