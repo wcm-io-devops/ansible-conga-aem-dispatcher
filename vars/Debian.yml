@@ -1,4 +1,13 @@
-_apache_config_path: "{{ apache_config_path | default('/etc/apache2') }}"
+apache_config_path: "{{ conga_aem_dispatcher_apache_config_path | default('/etc/apache2') }}"
 
-apache_user: www-data
-apache_group: www-data
+apache_sites_available: "{{ conga_aem_dispatcher_apache_sites_available | default(apache_config_path+'/sites-available') }}"
+apache_sites_enabled: "{{ conga_aem_dispatcher_apache_sites_enabled | default(apache_config_path+'/sites-enabled') }}"
+
+apache_conf_available: "{{ conga_aem_dispatcher_apache_conf_available | default(apache_config_path+'/conf-available') }}"
+apache_conf_enabled: "{{ conga_aem_dispatcher_apache_conf_enabled | default(apache_config_path+'/conf-enabled') }}"
+
+apache_user: "{{ conga_aem_dispatcher_apache_user | default('www-data') }}"
+apache_group: "{{ conga_aem_dispatcher_apache_group | default('www-data') }}"
+
+apache_config_owner: "{{ conga_aem_dispatcher_apache_config_owner | default('root') }}"
+apache_config_group: "{{ conga_aem_dispatcher_apache_config_group | default('root')  }}"

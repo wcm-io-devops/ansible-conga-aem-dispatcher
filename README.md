@@ -23,6 +23,14 @@ Available variables are listed below, along with default values (see `defaults/m
 
 Overrides the distribution specific apache_config_path wich is derived from the vars.
 
+    conga_aem_dispatcher_a2enconf: true
+
+Controls if configuration is enabled using `a2enconf` on Debian based OS.
+
+    conga_aem_dispatcher_a2ensite: true
+
+Controls if sites are enabled `a2ensite` on Debian based OS.
+
 ## Dependencies
 
 * [wcm_io_devops.conga_facts](https://github.com/wcm-io-devops/ansible-conga-facts)

@@ -8,7 +8,10 @@
     name: "{{ item }}"
     state: present
   with_items: "{{ conga_config.httpd.modules }}"
-  when: conga_config.httpd is defined and conga_config.httpd.modules is defined
+  when:
+    - conga_config.httpd is defined
+    - conga_config.httpd.modules is defined
+    - not conga_aem_dispatcher_restricted_mode
   notify:
     - restart apache
 
@@ -17,6 +20,8 @@
   apache2_module:
     name: access_compat
     state: present
-  when: "apache_version.split('.')[1] >= '4'"
+  when:
+    - "apache_version.split('.')[1] >= '4'"
+    - not conga_aem_dispatcher_restricted_mode
   notify:
     - restart apache

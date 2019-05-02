@@ -1,3 +1,22 @@
-# Overrides the distribution specific apache_config_path wich is derived from the vars
-# apache_config_path: /etc/apache2
+# Overrides the distribution specific apache_config_path which is derived from the vars.
+# conga_aem_dispatcher_apache_config_path: /etc/apache2
+
+# Override the distribution specific apache user which is derived from the vars.
+# conga_aem_dispatcher_apache_user: www-data
+
+# Override the distribution specific apache group which is derived from the vars.
+# conga_aem_dispatcher_apache_group: www-data
+
+# Controls if role is running in a non-root restricted mode. This will disable a2enmod, a2enconf and a2ensite commands.
+conga_aem_dispatcher_restricted_mode: false
+
+#conga_aem_dispatcher_apache_config_owner: root
+#conga_aem_dispatcher_apache_config_group: root
+
+#conga_aem_dispatcher_apache_sites_available: "{{ apache_config_path }}/conf-available }}"
+#conga_aem_dispatcher_apache_sites_enabled: "{{ apache_config_path }}/conf-enabled }}"
+
+#conga_aem_dispatcher_apache_conf_available: "{{ apache_config_path }}/conf-available }}"
+#conga_aem_dispatcher_apache_conf_enabled: "{{ apache_config_path }}/conf-enabled }}"
+
 
