@@ -4,7 +4,7 @@
   changed_when: true
 
 - name: Include httpd module setup.
-  include_tasks: "enable_modules.yml"
+  include_tasks: "manage_modules.yml"
 
 # Copy conf files from conf.d to conf-available
 - name: Copy conf.d CONGA files to conf-available.
