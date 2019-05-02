@@ -11,7 +11,7 @@
   include_role:
     name: wcm_io_devops.conga_files
   vars:
-    conga_files_base_path: "{{ apache_config_path }}/conf-available"
+    conga_files_base_path: "{{ _apache_config_path }}/conf-available"
     conga_files_strip: "conf.d/"
     conga_files_handlers: [ restart apache ]
     conga_files_files: "{{ conga_files_paths | select('match', '^conf.d/.*') | list }}"
@@ -21,7 +21,7 @@
 - name: Enable CONGA Apache configurations.
   command: a2enconf {{ item | basename }}
   args:
-    creates: "{{ apache_config_path }}/conf-enabled/{{ item | basename }}"
+    creates: "{{ _apache_config_path }}/conf-enabled/{{ item | basename }}"
   with_items: "{{ conga_files_paths | select('match', '^conf.d/.*') | list }}"
   notify:
     - restart apache

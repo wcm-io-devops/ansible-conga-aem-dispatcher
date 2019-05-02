@@ -17,8 +17,11 @@ This role requires Ansible 2.0 or higher.
 
 ## Role Variables
 
-This role currently has no variables since it totally relies on the
-CONGA configuration model.
+Available variables are listed below, along with default values (see `defaults/main.yml`):
+
+    # apache_config_path: /etc/apache2
+
+Overrides the distribution specific apache_config_path wich is derived from the vars.
 
 ## Dependencies
 
