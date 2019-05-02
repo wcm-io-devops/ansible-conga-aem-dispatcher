@@ -13,7 +13,9 @@
 
 - name: Setup SSL if required by CONGA variant.
   include_tasks: setup_ssl.yml
-  when: "'ssl' in conga_variants"
+  when:
+    - "'ssl' in conga_variants"
+    - not conga_aem_dispatcher_restricted_mode
 
 # copy all config files but leave out distribution specific files
 - name: Copy all CONGA files except vhosts and conf
