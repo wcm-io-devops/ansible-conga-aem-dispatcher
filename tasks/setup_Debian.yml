@@ -1,7 +1,7 @@
 - name: Get installed version of Apache.
   command: "apachectl -v"
   register: _apache_version
-  changed_when: true
+  changed_when: false
 
 - name: Include httpd module setup.
   include_tasks: "manage_modules.yml"
