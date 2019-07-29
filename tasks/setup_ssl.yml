@@ -3,3 +3,4 @@
   with_items: "{{ conga_tenants }}"
   loop_control:
     loop_var: tenant
+  when: tenant.config.httpd.ssl.skipCopyCertificates is not defined or tenant.config.httpd.ssl.skipCopyCertificates == false
