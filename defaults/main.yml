@@ -18,5 +18,3 @@ conga_aem_dispatcher_restricted_mode: false
 
 #conga_aem_dispatcher_apache_conf_available: "{{ apache_config_path }}/conf-available }}"
 #conga_aem_dispatcher_apache_conf_enabled: "{{ apache_config_path }}/conf-enabled }}"
-
-

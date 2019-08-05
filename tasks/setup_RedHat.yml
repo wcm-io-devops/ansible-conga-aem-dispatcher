@@ -25,4 +25,3 @@
     conga_files_directories: "{{ conga_directories | select('match', '^conf.d/.*') | list }}"
     conga_files_owner: "{{ apache_config_owner }}"
     conga_files_group: "{{ apache_config_group }}"
-
