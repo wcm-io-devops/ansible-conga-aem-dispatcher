@@ -19,17 +19,36 @@ This role requires Ansible 2.0 or higher.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    # apache_config_path: /etc/apache2
+    # conga_aem_dispatcher_apache_config_path: /etc/apache2
 
-Overrides the distribution specific apache_config_path wich is derived from the vars.
+# Overrides the distribution specific apache_config_path which is derived from the vars.
 
-    conga_aem_dispatcher_a2enconf: true
+    # conga_aem_dispatcher_apache_user: www-data
 
-Controls if configuration is enabled using `a2enconf` on Debian based OS.
+# Override the distribution specific apache user which is derived from the vars.
 
-    conga_aem_dispatcher_a2ensite: true
+# conga_aem_dispatcher_apache_group: www-data
 
-Controls if sites are enabled `a2ensite` on Debian based OS.
+Override the distribution specific apache group which is derived from the vars.
+
+    conga_aem_dispatcher_restricted_mode: false
+
+Controls if role is running in a non-root restricted mode. This will disable a2enmod, a2enconf and a2ensite commands.
+
+    #conga_aem_dispatcher_apache_config_owner: root
+    #conga_aem_dispatcher_apache_config_group: root
+
+The owner and group of apache config files.
+
+    #conga_aem_dispatcher_apache_sites_available: "{{ apache_config_path }}/sites-available }}"
+    #conga_aem_dispatcher_apache_sites_enabled: "{{ apache_config_path }}/sites-enabled }}"
+
+Path to sites-available and sites-enabled folders. Only used on Debian based OS.
+
+    #conga_aem_dispatcher_apache_conf_available: "{{ apache_config_path }}/conf-available }}"
+    #conga_aem_dispatcher_apache_conf_enabled: "{{ apache_config_path }}/conf-enabled }}"
+
+Path to conf-available and conf-enabled folders. Only used on Debian based OS.
 
 ## Dependencies
 
