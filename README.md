@@ -21,13 +21,13 @@ Available variables are listed below, along with default values (see `defaults/m
 
     # conga_aem_dispatcher_apache_config_path: /etc/apache2
 
-# Overrides the distribution specific apache_config_path which is derived from the vars.
+Overrides the distribution specific apache_config_path which is derived from the vars.
 
     # conga_aem_dispatcher_apache_user: www-data
 
-# Override the distribution specific apache user which is derived from the vars.
+Override the distribution specific apache user which is derived from the vars.
 
-# conga_aem_dispatcher_apache_group: www-data
+    # conga_aem_dispatcher_apache_group: www-data
 
 Override the distribution specific apache group which is derived from the vars.
 
