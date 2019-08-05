@@ -40,13 +40,13 @@ Controls if role is running in a non-root restricted mode. This will disable a2e
 
 The owner and group of apache config files.
 
-    #conga_aem_dispatcher_apache_sites_available: "{{ apache_config_path }}/sites-available }}"
-    #conga_aem_dispatcher_apache_sites_enabled: "{{ apache_config_path }}/sites-enabled }}"
+    #conga_aem_dispatcher_apache_sites_available: "{{ apache_config_path }}/sites-available"
+    #conga_aem_dispatcher_apache_sites_enabled: "{{ apache_config_path }}/sites-enabled"
 
 Path to sites-available and sites-enabled folders. Only used on Debian based OS.
 
-    #conga_aem_dispatcher_apache_conf_available: "{{ apache_config_path }}/conf-available }}"
-    #conga_aem_dispatcher_apache_conf_enabled: "{{ apache_config_path }}/conf-enabled }}"
+    #conga_aem_dispatcher_apache_conf_available: "{{ apache_config_path }}/conf-available"
+    #conga_aem_dispatcher_apache_conf_enabled: "{{ apache_config_path }}/conf-enabled"
 
 Path to conf-available and conf-enabled folders. Only used on Debian based OS.
 
