@@ -1,4 +1,7 @@
-apache_config_path: /etc/httpd
+apache_config_path: "{{ conga_aem_dispatcher_apache_config_path | default('/etc/httpd') }}"
 
-apache_user: apache
-apache_group: apache
+apache_user: "{{ conga_aem_dispatcher_apache_user | default('apache') }}"
+apache_group: "{{ conga_aem_dispatcher_apache_group | default('apache') }}"
+
+apache_config_owner: "{{ conga_aem_dispatcher_apache_config_owner | default('root') }}"
+apache_config_group: "{{ conga_aem_dispatcher_apache_config_group | default('root')  }}"
