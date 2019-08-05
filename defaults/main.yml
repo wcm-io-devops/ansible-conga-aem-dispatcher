@@ -15,9 +15,9 @@ conga_aem_dispatcher_restricted_mode: false
 #conga_aem_dispatcher_apache_config_group: root
 
 # Path to sites-available and sites-enabled folders, only used on Debian based OS.
-#conga_aem_dispatcher_apache_sites_available: "{{ apache_config_path }}/sites-available }}"
-#conga_aem_dispatcher_apache_sites_enabled: "{{ apache_config_path }}/sites-enabled }}"
+#conga_aem_dispatcher_apache_sites_available: "{{ apache_config_path }}/sites-available"
+#conga_aem_dispatcher_apache_sites_enabled: "{{ apache_config_path }}/sites-enabled"
 
 # Path to conf-available and conf-enabled folders, only used on Debian based OS.
-#conga_aem_dispatcher_apache_conf_available: "{{ apache_config_path }}/conf-available }}"
-#conga_aem_dispatcher_apache_conf_enabled: "{{ apache_config_path }}/conf-enabled }}"
+#conga_aem_dispatcher_apache_conf_available: "{{ apache_config_path }}/conf-available"
+#conga_aem_dispatcher_apache_conf_enabled: "{{ apache_config_path }}/conf-enabled"
