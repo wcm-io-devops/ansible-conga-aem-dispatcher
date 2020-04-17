@@ -21,3 +21,7 @@ conga_aem_dispatcher_restricted_mode: false
 # Path to conf-available and conf-enabled folders, only used on Debian based OS.
 #conga_aem_dispatcher_apache_conf_available: "{{ apache_config_path }}/conf-available"
 #conga_aem_dispatcher_apache_conf_enabled: "{{ apache_config_path }}/conf-enabled"
+
+# If set to true, SSL certificate files won't be copied from the controlhost to the target machine.
+# This is useful in scenarios where the SSL files are managed/maintained by another tool, e.g. Puppet.
+tenant.config.httpd.ssl.skipCopyCertificates: false
