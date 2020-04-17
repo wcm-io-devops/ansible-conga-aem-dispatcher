@@ -50,6 +50,11 @@ Path to sites-available and sites-enabled folders. Only used on Debian based OS.
 
 Path to conf-available and conf-enabled folders. Only used on Debian based OS.
 
+    tenant.config.httpd.ssl.skipCopyCertificates: false 
+
+If set to true, SSL certificate files won't be copied from the controlhost to the target machine.
+This is useful in scenarios where the SSL files are managed/maintained by another tool, e.g. Puppet.
+
 ## Dependencies
 
 * [wcm_io_devops.conga_facts](https://github.com/wcm-io-devops/ansible-conga-facts)
