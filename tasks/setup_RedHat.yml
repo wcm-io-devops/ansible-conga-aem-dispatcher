@@ -1,14 +1,15 @@
 # Shims for Debian compatibility
-- block:
-  - name: Make sure /etc/ssl/private exists.
-    path: /etc/ssl/private
-    state: directory
-    mode: '0755'
-  - name: Create /etc/ssl/private link for SSL key files.
-    file:
-      src: /etc/pki/tls/private/*
-      dest: /etc/ssl/private/
-      state: link
+- name: Symlink SSL cert path to /etc/ssl/private.
+  block:
+    - name: Make sure /etc/ssl/private exists.
+      path: /etc/ssl/private
+      state: directory
+      mode: '0755'
+    - name: Create /etc/ssl/private link for SSL key files.
+      file:
+        src: /etc/pki/tls/private/*
+        dest: /etc/ssl/private/
+        state: link
   when: "'ssl' in conga_variants"
 
 - name: Set APACHE_LOG_DIR variable.
