@@ -7,9 +7,11 @@
       mode: '0755'
   - name: Create /etc/ssl/private link for SSL key files.
     file:
-      src: /etc/pki/tls/private/*
+      src: "{{ item }}"
       dest: /etc/ssl/private/
       state: link
+    with_fileglob:
+      - "/etc/pki/tls/private/*"
   when: "'ssl' in conga_variants"
 
 - name: Set APACHE_LOG_DIR variable.
