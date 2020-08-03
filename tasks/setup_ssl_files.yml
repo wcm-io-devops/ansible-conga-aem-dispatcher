@@ -5,11 +5,10 @@
       - "{{ tenant.config.httpd.ssl.certificateKeyFile }}"
 
 # CA certificate is optional
-- block:
-  - name: Add SSL CA certificate to list.
-    set_fact:
-      ssl_files: "{{ ssl_files + [ tenant.config.httpd.ssl.caCertificateFile ] }}"
-  when: tenant.config.httpd.ssl.caCertificateFile is defined
+- name: Add SSL CA certificate to list.
+  set_fact:
+    ssl_files: "{{ ssl_files + [ tenant.config.httpd.ssl.caCertificateFile ] }}"
+  when: tenant.config.httpd.ssl.caCertificateFile
 
 - name: Copy SSL files.
   copy:
