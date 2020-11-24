@@ -8,7 +8,7 @@
 - name: Add SSL CA certificate to list.
   set_fact:
     ssl_files: "{{ ssl_files + [ tenant.config.httpd.ssl.caCertificateFile ] }}"
-  when: tenant.config.httpd.ssl.caCertificateFile
+  when: tenant.config.httpd.ssl.caCertificateFile | default(false)
 
 - name: Copy SSL files.
   copy:
