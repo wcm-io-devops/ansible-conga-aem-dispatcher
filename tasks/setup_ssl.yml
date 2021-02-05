@@ -1,3 +1,4 @@
+---
 - name: Copy SSL files.
   include_tasks: setup_ssl_files.yml
   with_items: "{{ conga_tenants }}"

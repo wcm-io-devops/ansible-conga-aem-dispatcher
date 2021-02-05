@@ -1,9 +1,11 @@
+---
 - name: Copy CONGA vhosts.
   include_role:
     name: wcm_io_devops.conga_files
   vars:
     conga_files_base_path: "{{ apache_config_path }}"
-    conga_files_handlers: [ restart apache ]
+    conga_files_handlers:
+      - restart apache
     conga_files_files: "{{ conga_files_paths | select('match', 'vhosts.d/') | list }}"
     conga_files_owner: "{{ apache_config_owner }}"
     conga_files_group: "{{ apache_config_group }}"
