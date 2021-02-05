@@ -11,6 +11,7 @@
     state: directory
     owner: "{{ apache_user }}"
     group: "{{ apache_group }}"
+    mode: 0755
 
 - name: Setup SSL if required by CONGA variant.
   include_tasks: setup_ssl.yml

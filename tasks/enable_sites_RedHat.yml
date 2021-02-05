@@ -15,5 +15,6 @@
     dest: "{{ apache_config_path }}/conf.d/vhosts.conf"
     line: 'IncludeOptional vhosts.d/*.conf'
     create: yes
+    mode: 0644
   notify:
     - restart apache
