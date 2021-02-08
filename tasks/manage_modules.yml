@@ -1,3 +1,4 @@
+---
 # _apache_version variable was determined during os family specific setup
 - name: Create apache_version variable.
   set_fact:

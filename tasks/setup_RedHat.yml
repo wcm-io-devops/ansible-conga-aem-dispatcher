@@ -1,3 +1,4 @@
+---
 # Shims for Debian compatibility
 - block:
   - name: Make sure /etc/ssl/private exists.
@@ -19,6 +20,7 @@
     dest: "{{ apache_config_path }}/conf.d/00-envvars.conf"
     line: 'Define APACHE_LOG_DIR /var/log/httpd'
     create: yes
+    mode: 0644
   notify:
     - restart apache
 
@@ -28,7 +30,8 @@
     name: wcm_io_devops.conga_files
   vars:
     conga_files_base_path: "{{ apache_config_path }}"
-    conga_files_handlers: [ restart apache ]
+    conga_files_handlers:
+      - restart apache
     conga_files_files: "{{ conga_files_paths | select('match', '^conf.d/.*') | list }}"
     conga_files_directories: "{{ conga_directories | select('match', '^conf.d/.*') | list }}"
     conga_files_owner: "{{ apache_config_owner }}"

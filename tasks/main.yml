@@ -1,3 +1,4 @@
+---
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
 
@@ -10,6 +11,7 @@
     state: directory
     owner: "{{ apache_user }}"
     group: "{{ apache_group }}"
+    mode: 0755
 
 - name: Setup SSL if required by CONGA variant.
   include_tasks: setup_ssl.yml
@@ -23,7 +25,8 @@
     name: wcm_io_devops.conga_files
   vars:
     conga_files_base_path: "{{ apache_config_path }}"
-    conga_files_handlers: [ restart apache ]
+    conga_files_handlers:
+      - restart apache
     conga_files_files: "{{ conga_files_paths | select('match', '^(?!(vhosts|conf).d/)') | list }}"
     conga_files_directories: "{{ conga_directories | select('match', '^(?!(vhosts|conf).d)') | list }}"
     conga_files_owner: "{{ apache_config_owner }}"

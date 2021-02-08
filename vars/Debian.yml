@@ -1,3 +1,4 @@
+---
 apache_config_path: "{{ conga_aem_dispatcher_apache_config_path | default('/etc/apache2') }}"
 
 apache_sites_available: "{{ conga_aem_dispatcher_apache_sites_available | default(apache_config_path+'/sites-available') }}"
