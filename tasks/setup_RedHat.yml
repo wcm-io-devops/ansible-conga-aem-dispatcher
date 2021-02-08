@@ -20,7 +20,7 @@
     dest: "{{ apache_config_path }}/conf.d/00-envvars.conf"
     line: 'Define APACHE_LOG_DIR /var/log/httpd'
     create: yes
-    mode: 0755
+    mode: 0644
   notify:
     - restart apache
 
